@@ -9,7 +9,7 @@
           type="button"
           class="btn btn-outline-secondary"
           @click="changeDisplayMode('grid')"
-          v-bind:class="{active: displayMode === 'grid'}"
+          :class="{active: displayMode === 'grid'}"
         >
           <i class="fas fa-th"></i>
         </button>
@@ -17,7 +17,7 @@
           type="button"
           class="btn btn-outline-secondary"
           @click="changeDisplayMode('list')"
-          v-bind:class="{active: displayMode === 'list'}"
+          :class="{active: displayMode === 'list'}"
         >
           <i class="fas fa-list"></i>
         </button>

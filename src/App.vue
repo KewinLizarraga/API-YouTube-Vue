@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <SearchForm v-on:search="search" />
+    <SearchForm @search="search" />
     <SearchResult
       v-if="videos.length > 0"
       :videos="videos"
@@ -9,10 +9,10 @@
     />
     <Pagination
       v-if="videos.length > 0"
-      :prevPageToken="prevPageToken"
-      :nextPageToken="nextPageToken"
-      v-on:prev-page="prevPage"
-      v-on:next-page="nextPage"
+      :prevPageToken="api.prevPageToken"
+      :nextPageToken="api.nextPageToken"
+      @prev-page="prevPage"
+      @next-page="nextPage"
     />
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
       this.reformattedSearchString = searchParams.join(" ");
       this.api.q = searchParams.join("+");
       const { baseUrl, part, type, order, maxResults, q, key } = this.api;
-      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&maxResults${maxResults}&q=${q}&key=${key}`;
+      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&maxResults=${maxResults}&q=${q}&key=${key}`;
       this.getData(apiUrl);
     },
     prevPage() {
@@ -69,7 +69,7 @@ export default {
         key,
         prevPageToken
       } = this.api;
-      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&maxResults${maxResults}&q=${q}&key=${key}&pageToken=${prevPageToken}`;
+      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&maxResults=${maxResults}&q=${q}&key=${key}&pageToken=${prevPageToken}`;
       this.getData(apiUrl);
     },
     nextPage() {
@@ -83,7 +83,7 @@ export default {
         key,
         nextPageToken
       } = this.api;
-      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&maxResults${maxResults}&q=${q}&key=${key}&pageToken=${nextPageToken}`;
+      const apiUrl = `${baseUrl}part=${part}&type=${type}&order=${order}&maxResults=${maxResults}&q=${q}&key=${key}&pageToken=${nextPageToken}`;
       this.getData(apiUrl);
     },
     getData(apiUrl) {
@@ -93,8 +93,9 @@ export default {
           this.videos = res.data.items;
           this.api.prevPageToken = res.data.prevPageToken;
           this.api.nextPageToken = res.data.nextPageToken;
-          console.log(res);
+          console.log(this.videos);
           console.log(apiUrl);
+          
           
         })
         .catch(err => {

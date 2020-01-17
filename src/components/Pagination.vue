@@ -2,16 +2,13 @@
   <div class="container">
     <nav>
       <ul class="pagination justify-content-end">
-        <li class="page-item" v-bind:class="{ disabled: prevPageToken === undefined }">
+        <li class="page-item" :class="{ disabled: prevPageToken === undefined }">
           <a class="page-link" href="#" aria-label="Previous" @click="prevPage">
             <span aria-hidden="true">&laquo; Previous</span>
           </a>
         </li>
 
-        <li
-            class="page-item"
-            v-bind:class="{ disabled: nextPageToken === undefined }"
-        >
+        <li class="page-item" :class="{ disabled: nextPageToken === undefined }">
           <a class="page-link" href="#" aria-label="Next" @click="nextPage">
             <span aria-hidden="true">Next &raquo;</span>
           </a>
